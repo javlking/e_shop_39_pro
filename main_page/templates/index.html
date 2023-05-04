@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <input type="text" name="exact_product">
+        <button>Поиск</button>
+    </form>
+    <hr>
+<!--  Вывод всех категорий  -->
+    {% for category in all_categories %}
+        <a href="/category/{{ category.id }}">{{ category.category_name }}</a>
+    {% endfor %}
+
+<!--  Вывод всех продуктов -->
+    {% for i in products %}
+        <a href="/item/{{ i.id }}">{{ i.product_name }}</a>
+    {% endfor %}
+
+</body>
+</html>

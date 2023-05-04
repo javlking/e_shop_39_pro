@@ -15,7 +15,7 @@ class Category(models.Model):
 # Создать таблицу для продуктов
 class Product(models.Model):
     # Создаем колонки для таблицы продуктов
-    products_name = models.CharField(max_length=125)
+    product_name = models.CharField(max_length=125)
     product_count = models.IntegerField()
     product_price = models.FloatField()
     product_photo = models.ImageField(upload_to='media')
@@ -27,3 +27,10 @@ class Product(models.Model):
     # Вывод в нормальном виде
     def __str__(self):
         return self.product_name
+
+
+class UserCart(models.Model):
+    user_id = models.IntegerField()
+    user_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user_product_quantity = models.IntegerField()
+    total_for_product = models.FloatField()
