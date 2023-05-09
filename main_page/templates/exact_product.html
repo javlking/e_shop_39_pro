@@ -17,5 +17,11 @@
 Количество на складе: {{ product.product_count }}<br>
 Категория: {{ product.product_category }}
 
+<form method="post">
+    {% csrf_token %}
+    <input type="number" name="user_product_quantity">
+    <button>Заказать</button>
+</form>
+
 </body>
 </html>
