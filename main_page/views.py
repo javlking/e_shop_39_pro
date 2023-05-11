@@ -37,17 +37,24 @@ def get_exact_product(request, pk):
                 total_for_product=product.product_price*int(request.POST.get('user_product_quantity')))
         return redirect('/cart')
 
-    return render(request, 'exact_product.html', context)
+    return render(request, 'about_product.html', context)
 
 
 def get_exact_category(request, pk):
-    all_products = models.Product.objects.filter(product_category=pk)
+    exact_category = models.Category.objects.get(id=pk)
+    categories = models.Category.objects.all()
+    category_products = models.Product.objects.filter(product_category=exact_category)
 
-    return render(request, 'category_all.html', {'products': all_products})
+    return render(request, 'categrory_products.html', {'category_products': category_products,
+                                                       'categories': categories})
+
 
 def get_user_cart(request):
      user_cart = models.UserCart.objects.filter(user_id=request.user.id)
-     context = {'cart': user_cart}
+     total = sum([i.total_for_product for i in user_cart])
+
+     context = {'cart': user_cart, 'total': total}
+
      return render(request, 'user_cart.html', context)
 
 
